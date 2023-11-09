@@ -1,6 +1,5 @@
 // Require the necessary discord.js classes
 const { Client, Events, GatewayIntentBits } = require('discord.js');
-const { tokentest } = require('./config.json');
 const { token } = require('./config.json');
 
 
@@ -43,13 +42,12 @@ client.on(Events.VoiceStateUpdate, (oldState, newState) => {
         return;
       }
 
-      // Send a message to the voice channel
+      // Send a message to the text channel
       const message = textChannel.send(`${newState.member.user.tag} se ha conectado al canal de voz ${voiceChannel.name}`);
 
       // Store the message in the map
-      userTextChannelMessageMap.set(newState.member.user.id, message);
-
-    
+      userTextChannelMessageMap.set(newState.member.user.id, message.id);
+ 
     } else {
       // If the voice channel is not found, log an error
       console.error(`Could not find voice channel with name 'Channel Name'`);
@@ -59,17 +57,22 @@ client.on(Events.VoiceStateUpdate, (oldState, newState) => {
 
     // Update the user's last voice channel time
     userLastVoiceChannelTimeMap.set(newState.member.user.id, Date.now());
+  
+  }
+});
 
+
+
+// Iniciamos el cliente
+client.login(token);
+
+/*
     // Get the message that was sent to the text channel when the user joined the voice channel
     const message = userTextChannelMessageMap.get(newState.member.user.id);
 
     // If the message exists, delete it
     if (message) {
       message.delete();
-      userTextChannelMessageMap.delete(newState.member.user.id,message);
+      userTextChannelMessageMap.delete(newState.member.user.id, message);
     }
-  }
-});
-
-// Iniciamos el cliente
-client.login(tokentest);
+*/
