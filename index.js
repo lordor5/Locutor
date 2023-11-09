@@ -58,15 +58,7 @@ client.on(Events.VoiceStateUpdate, (oldState, newState) => {
     // Update the user's last voice channel time
     userLastVoiceChannelTimeMap.set(newState.member.user.id, Date.now());
   
-  }
-});
-
-
-
-// Iniciamos el cliente
-client.login(token);
-
-/*
+    /*
     // Get the message that was sent to the text channel when the user joined the voice channel
     const message = userTextChannelMessageMap.get(newState.member.user.id);
 
@@ -75,4 +67,11 @@ client.login(token);
       message.delete();
       userTextChannelMessageMap.delete(newState.member.user.id, message);
     }
-*/
+  */
+  }
+});
+
+
+// Iniciamos el cliente
+client.login(token);
+
